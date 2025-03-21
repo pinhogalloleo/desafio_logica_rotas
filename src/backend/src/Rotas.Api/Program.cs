@@ -1,22 +1,18 @@
 
-using Microsoft.AspNetCore.Mvc;
-using Rotas.Application.Dtos;
 using Rotas.Application.UseCases.Viagens;
 using Rotas.Domain.Services;
-
-// setup default start route to redirect to swagger
-
+using Rotas.DataAccess.FileDataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSwaggerGen();
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 
-// registering services
-builder.Services.AddScoped<CadastroViagemService>();
+builder.Configuration.AddJsonFile("appSettings.json");
 
-// Registering use cases
-builder.Services.AddScoped<AddViagemUseCase>();
+builder.Services.SetupFileDataAccess(builder.Configuration); // registering data access
+builder.Services.AddScoped<CadastroViagemService>(); // registering services, need for Use Cases
+builder.Services.AddScoped<AddViagemUseCase>(); // Registering use cases
 
 var app = builder.Build();
 
@@ -25,12 +21,10 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.MapGet("/", () => Results.Redirect("/swagger"));
+    app.MapGet("/", () => Results.Redirect("/swagger")); // default redirect to Swagger on Dev env
 }
 
 app.MapControllers();
 app.UseHttpsRedirection();
-
-
 
 await app.RunAsync();

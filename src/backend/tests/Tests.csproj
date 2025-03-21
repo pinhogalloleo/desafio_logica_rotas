@@ -20,6 +20,6 @@
     <ProjectReference Include="..\src\Rotas.Api\Rotas.Api.csproj" />
     <ProjectReference Include="..\src\Rotas.Domain\Rotas.Domain.csproj" />
     <ProjectReference Include="..\src\Rotas.Application\Rotas.Application.csproj" />
-    <ProjectReference Include="..\src\Rotas.DataAccess.EF\Rotas.DataAccess.EF.csproj" />
+    <ProjectReference Include="..\src\Rotas.DataAccess.FileDataAccess\Rotas.DataAccess.FileDataAccess.csproj" />
   </ItemGroup>
 </Project>

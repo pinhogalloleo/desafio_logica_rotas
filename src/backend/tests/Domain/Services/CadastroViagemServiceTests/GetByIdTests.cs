@@ -26,7 +26,7 @@ public class GetByIdTests
         var service = new CadastroViagemService(repository.Object);
 
         // Act
-        var result = await service.GetByIdViagem(1);
+        var result = await service.GetById(1);
 
         // Assert
         Assert.NotNull(result);
@@ -45,7 +45,7 @@ public class GetByIdTests
 
         // Act
         // Assert
-        var exception = await Assert.ThrowsAsync<NaoEncontradoException>(() => service.GetByIdViagem(1));
+        var exception = await Assert.ThrowsAsync<NaoEncontradoException>(() => service.GetById(1));
         Assert.Contains("viagem não encontrada", exception.Message.ToLowerInvariant());
     }
 

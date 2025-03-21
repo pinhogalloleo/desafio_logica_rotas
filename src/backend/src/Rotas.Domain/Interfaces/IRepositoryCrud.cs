@@ -21,7 +21,7 @@ namespace Rotas.Domain.Interfaces
         /// var result = await repository.SearchFilteredAsync(x => x.Nome == "alfredo");
         /// </code>
         /// </example>
-        Task<List<T>> SearchFilteredAsync(Expression<Func<T, bool>> filter);
+        Task<List<T>> SearchByExpressionAsync(Expression<Func<T, bool>> filter);
 
         /// <summary>
         /// Get an entity by ID
@@ -31,12 +31,12 @@ namespace Rotas.Domain.Interfaces
         /// <summary>
         /// Create a new entity and return the ID generated
         /// </summary>
-        Task<int> CreateAsync(T entity);
+        Task<int> InsertAsync(T entity);
 
         /// <summary>
         /// Update an entity
         /// </summary>
-        Task<T> UpdateAsync(T entity);
+        Task<T> UpdateAsync(T? entity);
 
         /// <summary>
         /// Delete an entity by ID

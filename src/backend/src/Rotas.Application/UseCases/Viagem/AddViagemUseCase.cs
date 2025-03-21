@@ -21,7 +21,7 @@ namespace Rotas.Application.UseCases.Viagens
                 Custo = viagemDto.Custo
             };
 
-            return await _cadastroViagemService.AddViagemAsync(viagem);
+            return await _cadastroViagemService.InsertViagemAsync(viagem);
         }
 
     }

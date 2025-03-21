@@ -17,7 +17,6 @@ namespace Rotas.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> AddViagem([FromBody] ViagemDto viagemDto)
         {
-            return Ok("add viagem");
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 

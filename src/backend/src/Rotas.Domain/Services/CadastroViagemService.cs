@@ -20,8 +20,11 @@ namespace Rotas.Domain.Services
         /// <param name="viagem"></param>
         /// <returns>Id (int)</returns>
         /// <exception cref="ValidacaoException"></exception>
-        public async Task<int> AddViagemAsync(Viagem viagem)
+        public async Task<int> InsertViagemAsync(Viagem? viagem)
         {
+            if (viagem == null)
+                throw new ArgumentNullException(nameof(viagem), "Objeto Viagem não pode ser nulo");
+
             var erros = new List<ValidationResult>();
             if (!Validator.TryValidateObject(viagem, new ValidationContext(viagem), erros, true))
             {
@@ -31,7 +34,7 @@ namespace Rotas.Domain.Services
                 throw new ValidacaoException(errosMsg);
             }
 
-            return await _repository.CreateAsync(viagem);
+            return await _repository.InsertAsync(viagem);
         }
 
         /// <summary>
@@ -41,7 +44,7 @@ namespace Rotas.Domain.Services
         /// <returns>Task</returns>
         /// <exception cref="ValidacaoException"></exception>
         /// <exception cref="NaoEncontradoException"></exception>
-        public async Task UpdateViagem(Viagem viagem)
+        public async Task UpdateViagem(Viagem? viagem)
         {
             if (viagem == null)
                 throw new ArgumentNullException(nameof(viagem), "Objeto Viagem não pode ser nulo");
@@ -49,16 +52,15 @@ namespace Rotas.Domain.Services
             var erros = new List<ValidationResult>();
             if (!Validator.TryValidateObject(viagem, new ValidationContext(viagem), erros, true))
             {
-                StringBuilder errosMsg = new StringBuilder();
-                foreach (var erro in erros)
-                    errosMsg.AppendLine(erro.ErrorMessage);
+                var listaErros = erros.Select(e => e.ErrorMessage).ToList();
+                var errosMsg = string.Join(", ", listaErros);
 
-                throw new ValidacaoException(errosMsg.ToString());
+                throw new ValidacaoException(errosMsg);
             }
 
             var viagemExistente = await _repository.GetByIdAsync(viagem.Id);
             if (viagemExistente == null)
-                throw new NaoEncontradoException("Viagem não encontrada");
+                throw new NaoEncontradoException($"Viagem não encontrada pelo Id [{viagem.Id}]");
 
             await _repository.UpdateAsync(viagem);
         }
@@ -85,7 +87,7 @@ namespace Rotas.Domain.Services
         /// <returns>Viagem</returns>
         /// <exception cref="NaoEncontradoException"></exception>
         /// <exception cref="ValidacaoException"></exception>
-        public async Task<Viagem> GetByIdViagem(int id)
+        public async Task<Viagem> GetById(int id)
         {
             var viagem = await _repository.GetByIdAsync(id);
             if (viagem == null)
