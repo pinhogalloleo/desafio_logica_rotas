@@ -1,13 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using Rotas.DataAccess.FileDataAccess;
 using Rotas.Domain.Entities;
 using Rotas.Domain.Exceptions;
-using tests.Domain.Entities;
+using Tests.Domain.Entities;
 
-namespace tests.Infra.DataAccess.FileDataAccess;
+namespace Tests.Infra.DataAccess.FileDataAccess;
 
 public class TestUpdate
 {
@@ -58,8 +55,11 @@ public class TestUpdate
         retrievedAfterCreated.Origem = "CCC";
         retrievedAfterCreated.Destino = "DDD";
         retrievedAfterCreated.Custo = 20;
-        var updated = await repository.UpdateAsync(viagem);
+        await repository.UpdateAsync(retrievedAfterCreated);
 
+        // Act - after update
+        var updated = await repository.GetByIdAsync(retrievedAfterCreated.Id);
+        
         // Assert - checking after update
         Assert.NotNull(updated);
         Assert.Equal(viagem.Id, updated.Id);

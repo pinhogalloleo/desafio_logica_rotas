@@ -1,15 +1,12 @@
-using System.Runtime.Serialization;
 
-namespace Rotas.Domain.Exceptions
+namespace Rotas.Domain.Exceptions;
+public class NaoEncontradoException : Exception
 {
-    public class NaoEncontradoException : Exception
+    public NaoEncontradoException(string? message) : base(message)
     {
-        public NaoEncontradoException(string? message) : base(message)
-        {
-        }
-
-        public NaoEncontradoException(string? message, Exception? innerException) : base(message, innerException)
-        { }
-
     }
+
+    public NaoEncontradoException(string? message, Exception? innerException) : base(message, innerException)
+    { }
+
 }

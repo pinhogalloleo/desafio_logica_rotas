@@ -1,10 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using Rotas.Domain.Entities;
 using Rotas.Domain.Exceptions;
 using Rotas.Domain.Interfaces;
+using Rotas.Domain.Entities.Grafo;
+
 
 namespace Rotas.Domain.Services;
 
@@ -15,40 +14,68 @@ public class CalculoRotaService(IRepositoryCrud<Viagem> repository) : ICalculoRo
     /// <summary>
     /// Localiza a melhor rota entre dois pontos com lógica parecida com Grafo
     /// </summary>
-    public async Task<List<Viagem>> CalcularRotaAsync(string origem, string destino)
+    public async Task<Rota?> CalcularRotaAsync(string origem, string destino)
     {
         var viagens = await _repository.GetAllAsync();
         if (viagens == null || viagens.Count == 0)
             throw new NaoEncontradoException("Nenhuma viagem encontrada");
 
-        Dictionary<string, List<Viagem>> graph = MountGraph(viagens);
-
-        List<Viagem> melhorRota = CalculateBestRoute(graph, origem, destino);
-        
-        return melhorRota;
+        var grafo = new Grafo(viagens);
+        var rota = EncontrarMelhorRota(grafo, origem, destino);
+        return rota;
     }
 
-    private static List<Viagem> CalculateBestRoute(Dictionary<string, List<Viagem>> graph, string origem, string destino)
+    private static Rota? EncontrarMelhorRota(Grafo grafo, string origem, string destino)
     {
-        var listaMelhorRota = new List<Viagem>();
-        // TODO TO DO: implement graph algorithm
+        var distancias = new Dictionary<string, decimal>();
+        var predecessores = new Dictionary<string, string>();
+        var filaPrioridade = new SortedSet<(decimal Custo, string Vertice)>();
 
-        return listaMelhorRota;
-    }
+        foreach (var verticeIn in grafo.Adjacencias.Keys)
+            distancias[verticeIn] = decimal.MaxValue;
 
+        distancias[origem] = 0;
+        filaPrioridade.Add((0, origem));
 
-    private static Dictionary<string, List<Viagem>> MountGraph(List<Viagem> viagens)
-    {
-        var graph = new Dictionary<string, List<Viagem>>();
-        foreach (var viagem in viagens)
+        while (filaPrioridade.Any())
         {
-            if (!graph.ContainsKey(viagem.Origem))
-                graph[viagem.Origem] = new();
+            var (custoAtual, verticeAtual) = filaPrioridade.Min;
+            filaPrioridade.Remove(filaPrioridade.Min);
 
-            graph[viagem.Origem].Add(viagem);
+            if (custoAtual > distancias[verticeAtual])
+                continue;
+
+            foreach (var adjacencia in grafo.ObterAdjacencias(verticeAtual))
+            {
+                var custoNovo = custoAtual + adjacencia.Custo;
+
+                if (custoNovo < distancias[adjacencia.Destino])
+                {
+                    distancias[adjacencia.Destino] = custoNovo;
+                    predecessores[adjacencia.Destino] = verticeAtual;
+                    filaPrioridade.Add((custoNovo, adjacencia.Destino));
+                }
+            }
         }
 
-        return graph;
+        if (!distancias.ContainsKey(destino) || distancias[destino] == decimal.MaxValue)
+            return null; // Rota não encontrada
+
+        var caminho = new List<string>();
+        var vertice = destino;
+
+        while (vertice != origem)
+        {
+            if (!predecessores.ContainsKey(vertice))
+                throw new KeyNotFoundException($"The given key '{vertice}' was not present in the dictionary.");
+
+            caminho.Add(vertice);
+            vertice = predecessores[vertice];
+        }
+        caminho.Add(origem);
+        caminho.Reverse();
+
+        return new Rota(caminho, distancias[destino]);
     }
 
 

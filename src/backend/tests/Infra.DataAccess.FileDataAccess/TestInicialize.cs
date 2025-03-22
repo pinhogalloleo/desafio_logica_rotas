@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Rotas.DataAccess.FileDataAccess;
-using Moq;
-using System.IO;
 
-namespace tests.Infra.DataAccess.FileDataAccess;
+using Rotas.DataAccess.FileDataAccess;
+
+
+namespace Tests.Infra.DataAccess.FileDataAccess;
 
 public class TestInicialize
 {

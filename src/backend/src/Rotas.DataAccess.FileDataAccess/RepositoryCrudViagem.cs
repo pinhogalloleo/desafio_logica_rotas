@@ -90,7 +90,11 @@ public class RepositoryCrudViagem : IRepositoryCrud<Viagem>, IDisposable
         if (entity == null)
             throw new ArgumentNullException(nameof(entity), "Objeto viagem não pode ser nulo");
 
-        entity.Id = viagens.Max(x => x.I d) + 1;
+        if(viagens.Count > 0)
+            entity.Id = viagens.Max(x => x.Id) + 1;
+        else
+            entity.Id = 1;
+            
         viagens.Add(entity);
         return await Task.FromResult(entity.Id);
     }

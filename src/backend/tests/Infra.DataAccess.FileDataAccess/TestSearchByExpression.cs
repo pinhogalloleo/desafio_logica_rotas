@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Rotas.DataAccess.FileDataAccess;
-using Moq;
-using System.IO;
-using tests.Domain.Entities;
 
-namespace tests.Infra.DataAccess.FileDataAccess;
+using Rotas.DataAccess.FileDataAccess;
+using Tests.Domain.Entities;
+
+namespace Tests.Infra.DataAccess.FileDataAccess;
 public class TestSearchByExpression
 {
     [Fact]

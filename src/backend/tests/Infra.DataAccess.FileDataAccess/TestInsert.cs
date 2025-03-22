@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using Rotas.DataAccess.FileDataAccess;
 using Rotas.Domain.Entities;
-using tests.Domain.Entities;
+using Tests.Domain.Entities;
 
-namespace tests.Infra.DataAccess.FileDataAccess;
+namespace Tests.Infra.DataAccess.FileDataAccess;
 
 public class TestInsert
 {

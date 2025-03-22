@@ -1,1 +1,1 @@
-[{"Id":1,"Origem":"aaa","Destino":"bbb","Custo":999.99},{"Id":2,"Origem":"aa2","Destino":"bb2","Custo":12.22},{"Id":3,"Origem":"AA2","Destino":"BB2","Custo":12.22}]
+[{"Id":1,"Origem":"AAA","Destino":"CCC","Custo":20.00},{"Id":2,"Origem":"BBB","Destino":"CCC","Custo":5.00},{"Id":3,"Origem":"AAA","Destino":"BBB","Custo":5.00}]

@@ -1,17 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Rotas.DataAccess.FileDataAccess;
+
 using Moq;
-using System.IO;
-using tests.Domain.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Rotas.Domain.Interfaces;
 using Rotas.Domain.Entities;
+using Rotas.DataAccess.FileDataAccess.DependencyInjection;
 
-namespace tests.Infra.DataAccess.FileDataAccess;
+namespace Tests.Infra.DataAccess.FileDataAccess;
 
 public class DependencyInjectionTest
 {

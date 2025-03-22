@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using Rotas.Domain.Entities;
 using Rotas.Application.UseCases.Viagens.Insert;
 using Rotas.Application.UseCases.Viagens.Update;

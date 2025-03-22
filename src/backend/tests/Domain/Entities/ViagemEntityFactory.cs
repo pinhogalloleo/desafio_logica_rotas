@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Bogus;
 using Rotas.Domain.Entities;
 
-namespace tests.Domain.Entities
+namespace Tests.Domain.Entities
 {
     internal static class ViagemEntityFactory
     {

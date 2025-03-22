@@ -1,3 +1,4 @@
+
 using System.ComponentModel.DataAnnotations;
 
 namespace Rotas.Application.UseCases.Viagens.GetById;

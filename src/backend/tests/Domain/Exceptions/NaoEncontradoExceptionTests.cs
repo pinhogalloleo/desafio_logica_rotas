@@ -2,7 +2,7 @@ using System;
 using Xunit;
 
 using Rotas.Domain.Exceptions;
-namespace Rotas.Tests.Domain.Exceptions;
+namespace Tests.Domain.Exceptions;
 
 public class NaoEncontradoExceptionTests
 {

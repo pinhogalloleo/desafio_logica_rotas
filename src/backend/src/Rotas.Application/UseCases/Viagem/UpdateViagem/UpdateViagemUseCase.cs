@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Rotas.Application.Dtos;
+
 using Rotas.Domain.Entities;
 using Rotas.Domain.Exceptions;
 using Rotas.Domain.Interfaces;
@@ -11,10 +6,10 @@ using Rotas.Domain.Services;
 
 namespace Rotas.Application.UseCases.Viagens.Update;
 
-public class UpdateViagemUseCase(IRepositoryCrud<Viagem> repository, ViagemValidationService viagemValidationService) : BaseUseCase
+public class UpdateViagemUseCase(IRepositoryCrud<Viagem> repository, IViagemValidationService viagemValidationService) : BaseUseCase
 {
     private readonly IRepositoryCrud<Viagem> _repository = repository;
-    private readonly ViagemValidationService _viagemValidationService = viagemValidationService;
+    private readonly IViagemValidationService _viagemValidationService = viagemValidationService;
 
     public async Task ExecuteAsync(UpdateViagemDto viagemDto)
     {

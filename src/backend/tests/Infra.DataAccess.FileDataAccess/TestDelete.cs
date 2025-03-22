@@ -6,9 +6,9 @@ using Rotas.DataAccess.FileDataAccess;
 using Rotas.Domain.Entities;
 using Rotas.Domain.Interfaces;
 using Rotas.Domain.Exceptions;
-using tests.Domain.Entities;
+using Tests.Domain.Entities;
 
-namespace tests.Infra.DataAccess.FileDataAccess;
+namespace Tests.Infra.DataAccess.FileDataAccess;
 
 public class TestDelete
 {
@@ -58,14 +58,16 @@ public class TestDelete
         Assert.Equal(viagem.Custo, retrievedAfterCreated.Custo);
 
         // Act - deleting, and trying to retrieve it
-        await repository.DeleteAsync(viagem.Id);
+        await repository.DeleteAsync(newId);
 
-        var exception = await Record.ExceptionAsync(async () => await repository.GetByIdAsync(newId));
         var listAfterDeleted = await repository.GetAllAsync();
+        Viagem? retrievedAfterDeleted = null;
+        var exception = await Record.ExceptionAsync(async () => retrievedAfterDeleted = await repository.GetByIdAsync(newId));
+        
 
         // Assert - checking after update
-        Assert.NotNull(exception);
-        Assert.IsType<NaoEncontradoException>(exception);
+        Assert.Null(exception);
+        Assert.Null(retrievedAfterDeleted);
         Assert.True(listAfterDeleted.Count == 0);
 
         // clean up

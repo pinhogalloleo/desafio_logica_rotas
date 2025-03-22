@@ -1,12 +1,11 @@
 
 using Rotas.Domain.Entities;
-using Xunit;
 
-namespace Rotas.Tests.Domain.Entities;
+namespace Tests.Domain.Entities;
 public class ViagemTests
 {
     [Fact]
-    public void Test_Propriedade_Origem()
+    public void Test_Instantiate()
     {
         // Arrange
         var viagem = new Viagem()

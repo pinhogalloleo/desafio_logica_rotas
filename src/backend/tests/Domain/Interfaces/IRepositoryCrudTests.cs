@@ -1,8 +1,5 @@
-using System;
-using Xunit;
 
-
-namespace Rotas.Tests.Domain.Interfaces;
+namespace Tests.Domain.Interfaces;
 
 public class IRepositoryCrudTests
 {
