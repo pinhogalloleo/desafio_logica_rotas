@@ -8,7 +8,7 @@ using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
-
+using System.Threading.Tasks;
 
 namespace Rotas.DataAccess.FileDataAccess;
 
@@ -77,11 +77,9 @@ public class RepositoryCrudViagem : IRepositoryCrud<Viagem>, IDisposable
     }
 
 
-    public async Task<Viagem> GetByIdAsync(int id)
+    public async Task<Viagem?> GetByIdAsync(int id)
     {
         var result = viagens.FirstOrDefault(x => x.Id == id);
-        if (result == null)
-            throw new NaoEncontradoException($"Viagem não encontrada pelo id [{id}]");
 
         return await Task.FromResult(result);
     }
@@ -92,24 +90,26 @@ public class RepositoryCrudViagem : IRepositoryCrud<Viagem>, IDisposable
         if (entity == null)
             throw new ArgumentNullException(nameof(entity), "Objeto viagem não pode ser nulo");
 
-        entity.Id = viagens.Count + 1;
+        entity.Id = viagens.Max(x => x.I d) + 1;
         viagens.Add(entity);
         return await Task.FromResult(entity.Id);
     }
 
 
-    public async Task<Viagem> UpdateAsync(Viagem? entity)
+    public async Task UpdateAsync(Viagem? entity)
     {
         if (entity == null)
             throw new ArgumentNullException(nameof(entity), "Objeto viagem não pode ser nulo");
 
-        var index = viagens.FindIndex(x => x.Id == entity.Id);
+        await Task.Run(() =>
+        {
+            var index = viagens.FindIndex(x => x.Id == entity.Id);
 
-        if (index < 0)
-            throw new NaoEncontradoException($"Viagem não encontrada para atualização pelo id [{entity.Id}]");
+            if (index < 0)
+                throw new NaoEncontradoException($"Viagem não encontrada para atualização pelo id [{entity.Id}]");
 
-        viagens[index] = entity;
-        return await Task.FromResult(entity);
+            viagens[index] = entity;
+        });
     }
 
 
@@ -119,8 +119,10 @@ public class RepositoryCrudViagem : IRepositoryCrud<Viagem>, IDisposable
         if (index < 0)
             throw new NaoEncontradoException($"Viagem não encontrada para exclusão pelo id [{id}]");
 
-        viagens.RemoveAt(index);
-        await Task.CompletedTask;
+        await Task.Run(() =>
+        {
+            viagens.RemoveAt(index);
+        });
     }
 
 

@@ -4,15 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Rotas.Application.Dtos
-{
-    public class ViagemDto
-    {
-        [MinLength(3, ErrorMessage = "Origem deve ter pelo menos 3 letras")]
-        [MaxLength(15, ErrorMessage = "Origem deve ter no máximo 15 letras")]
-        [Required(ErrorMessage = "Origem é obrigatório")]
-        public required string Origem { get; set; }
+namespace Rotas.Application.UseCases.Rota.CalculoRota;
 
+    public class CalculoRotaDto
+    {
         [MinLength(3, ErrorMessage = "Destino deve ter pelo menos 3 letras")]
         [MaxLength(15, ErrorMessage = "Destino deve ter no máximo 15 letras")]
         [Required(ErrorMessage = "Destino é obrigatório")]
@@ -22,4 +17,3 @@ namespace Rotas.Application.Dtos
         [Required(ErrorMessage = "Custo é obrigatório")]
         public required decimal Custo { get; set; }
     }
-}

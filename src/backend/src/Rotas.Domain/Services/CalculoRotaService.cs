@@ -6,27 +6,50 @@ using Rotas.Domain.Entities;
 using Rotas.Domain.Exceptions;
 using Rotas.Domain.Interfaces;
 
-namespace Rotas.Domain.Services
+namespace Rotas.Domain.Services;
+
+public class CalculoRotaService(IRepositoryCrud<Viagem> repository) : ICalculoRotaService
 {
-    public class CalculoRotaService(IRepositoryCrud<Viagem> repository)
+    private readonly IRepositoryCrud<Viagem> _repository = repository;
+
+    /// <summary>
+    /// Localiza a melhor rota entre dois pontos com lógica parecida com Grafo
+    /// </summary>
+    public async Task<List<Viagem>> CalcularRotaAsync(string origem, string destino)
     {
-        private readonly IRepositoryCrud<Viagem> _repository = repository;
+        var viagens = await _repository.GetAllAsync();
+        if (viagens == null || viagens.Count == 0)
+            throw new NaoEncontradoException("Nenhuma viagem encontrada");
 
-        /// <summary>
-        /// Localiza a melhor rota entre dois pontos com lógica parecida com Grafo
-        /// </summary>
-        public async Task<List<Viagem>> LocalizarMelhorRota(string origem, string destino)
+        Dictionary<string, List<Viagem>> graph = MountGraph(viagens);
+
+        List<Viagem> melhorRota = CalculateBestRoute(graph, origem, destino);
+        
+        return melhorRota;
+    }
+
+    private static List<Viagem> CalculateBestRoute(Dictionary<string, List<Viagem>> graph, string origem, string destino)
+    {
+        var listaMelhorRota = new List<Viagem>();
+        // TODO TO DO: implement graph algorithm
+
+        return listaMelhorRota;
+    }
+
+
+    private static Dictionary<string, List<Viagem>> MountGraph(List<Viagem> viagens)
+    {
+        var graph = new Dictionary<string, List<Viagem>>();
+        foreach (var viagem in viagens)
         {
-            var viagens = await _repository.GetAllAsync();
-            if (viagens == null || viagens.Count == 0)
-                throw new NaoEncontradoException("Nenhuma viagem encontrada");
+            if (!graph.ContainsKey(viagem.Origem))
+                graph[viagem.Origem] = new();
 
-            // logica de grafo, por hora devolver a lista de viagens
-            // foreach (var viagem in viagens) {...}
-
-            return viagens;
+            graph[viagem.Origem].Add(viagem);
         }
 
-
+        return graph;
     }
-}
+
+
+}//..class

@@ -26,7 +26,7 @@ namespace Rotas.Domain.Interfaces
         /// <summary>
         /// Get an entity by ID
         /// </summary>
-        Task<T> GetByIdAsync(int id);
+        Task<T?> GetByIdAsync(int id);
 
         /// <summary>
         /// Create a new entity and return the ID generated
@@ -36,10 +36,10 @@ namespace Rotas.Domain.Interfaces
         /// <summary>
         /// Update an entity
         /// </summary>
-        Task<T> UpdateAsync(T? entity);
+        Task UpdateAsync(T entity);
 
         /// <summary>
-        /// Delete an entity by ID
+        /// Delete an entity by its ID
         /// </summary>
         Task DeleteAsync(int id);
     }

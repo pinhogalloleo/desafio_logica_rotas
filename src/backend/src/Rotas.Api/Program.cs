@@ -1,7 +1,7 @@
 
-using Rotas.Application.UseCases.Viagens;
-using Rotas.Domain.Services;
-using Rotas.DataAccess.FileDataAccess;
+using Rotas.DataAccess.FileDataAccess.DependencyInjection;
+using Rotas.Application.DependencyInjection;
+using Rotas.Domain.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSwaggerGen();
@@ -10,9 +10,9 @@ builder.Services.AddControllers();
 
 builder.Configuration.AddJsonFile("appSettings.json");
 
-builder.Services.SetupFileDataAccess(builder.Configuration); // registering data access
-builder.Services.AddScoped<CadastroViagemService>(); // registering services, need for Use Cases
-builder.Services.AddScoped<AddViagemUseCase>(); // Registering use cases
+builder.Services.SetupDomain();
+builder.Services.SetupFileDataAccess(builder.Configuration); // data access, repository
+builder.Services.SetupUseCasesAndServicesFacade(); // helper to config all use cases and the façade Services
 
 var app = builder.Build();
 
