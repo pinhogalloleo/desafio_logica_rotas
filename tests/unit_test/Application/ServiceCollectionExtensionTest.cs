@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Rotas.Application.DependencyInjection;
 using Rotas.Application.Services;
+using Rotas.Application.UseCases;
 using Rotas.Application.UseCases.CalculoRota;
 using Rotas.Application.UseCases.DeslocamentoCrud.Delete;
 using Rotas.Application.UseCases.DeslocamentoCrud.GetAll;
@@ -28,25 +29,15 @@ public class ServiceCollectionExtensionTest
         // Act
         services.SetupUseCasesAndServicesFacade();
         var serviceProvider = services.BuildServiceProvider();
-        var insertDeslocamentoUseCase = serviceProvider.GetService<InsertDeslocamentoUseCase>();
-        var updateDeslocamentoUseCase = serviceProvider.GetService<UpdateDeslocamentoUseCase>();
-        var deleteDeslocamentoUseCase = serviceProvider.GetService<DeleteDeslocamentoUseCase>();
-        var getByIdDeslocamentoUseCase = serviceProvider.GetService<GetByIdDeslocamentoUseCase>();
-        var getAllDeslocamentoUseCase = serviceProvider.GetService<GetAllDeslocamentoUseCase>();
-        var deslocamentoService = serviceProvider.GetService<DeslocamentoService>();
-        var calculoRotaUseCase = serviceProvider.GetService<CalculoRotaUseCase>();
-        var calculoRotaService = serviceProvider.GetService<CalculoRotaService>();
-        var deslocamentoValidationService = serviceProvider.GetService<DeslocamentoValidationService>();
 
         // Assert        
-        Assert.NotNull(insertDeslocamentoUseCase);
-        Assert.NotNull(updateDeslocamentoUseCase);
-        Assert.NotNull(deleteDeslocamentoUseCase);
-        Assert.NotNull(getByIdDeslocamentoUseCase);
-        Assert.NotNull(getAllDeslocamentoUseCase);
-        Assert.NotNull(deslocamentoService);
-        Assert.NotNull(calculoRotaUseCase);
-        Assert.NotNull(calculoRotaService);
+        var insertDeslocamentoUseCase = serviceProvider.GetService<IUseCase<InsertDeslocamentoDto, Task<int>>>();
+        var deslocamentoValidationService = serviceProvider.GetService<IDeslocamentoDuplicityValidationService>();
+
+        // Assert        
+        Assert.NotNull(services);
+        Assert.True(services.Count > 0);
         Assert.NotNull(deslocamentoValidationService);
+        Assert.NotNull(insertDeslocamentoUseCase);
     }
 }

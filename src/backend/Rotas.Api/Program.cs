@@ -9,8 +9,9 @@ builder.Services.AddControllers();
 
 builder.Configuration.AddJsonFile("appSettings.json");
 
-builder.Services.SetupInfraFileDataAccess(builder.Configuration); // data access, repository
 builder.Services.SetupUseCasesAndServicesFacade(); // helper to config all use cases and the façade Services
+builder.Services.SetupInfraFileDataAccess(builder.Configuration); // data access, repository
+
 
 var app = builder.Build();
 

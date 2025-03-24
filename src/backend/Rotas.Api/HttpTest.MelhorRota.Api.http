@@ -1,0 +1,10 @@
+
+#############################################################
+### Melhor rota controller
+
+@baseUrl = http://localhost:5167
+
+@controller = {{baseUrl}}/api/melhorrota
+
+### Get melhor rota
+GET {{controller}}?origem=AAA&destino=BBB

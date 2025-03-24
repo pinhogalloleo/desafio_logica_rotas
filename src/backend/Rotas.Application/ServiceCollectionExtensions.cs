@@ -35,11 +35,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IUseCase<CalculoRotaDto, Task<Rota?>>, CalculoRotaUseCase>();
         services.AddScoped<ICalculoRotaService, CalculoRotaService>();
 
-        // for domain
-        services.AddScoped<IDeslocamentoDuplicityValidationService, DeslocamentoValidationService>();
-
         return services;
     }
+    
 
 }
 

@@ -17,6 +17,7 @@ public class DeslocamentoController(IDeslocamentoService deslocamentoService) : 
     
 
     [HttpPost]
+    [Consumes("application/json")]
     public async Task<IActionResult> InsertDeslocamento([FromBody] InsertDeslocamentoDto insertDto)
     {
         if (!ModelState.IsValid)
@@ -35,6 +36,7 @@ public class DeslocamentoController(IDeslocamentoService deslocamentoService) : 
 
 
     [HttpPut]
+    [Consumes("application/json")]
     public async Task<IActionResult> UpdateDeslocamento([FromBody] UpdateDeslocamentoDto updateDto)
     {
         if (!ModelState.IsValid)
@@ -53,6 +55,7 @@ public class DeslocamentoController(IDeslocamentoService deslocamentoService) : 
 
 
     [HttpDelete("id")]
+    [Consumes("application/json")]
     public async Task<IActionResult> DeleteDeslocamento(int id)
     {
         if (!ModelState.IsValid)
@@ -72,6 +75,7 @@ public class DeslocamentoController(IDeslocamentoService deslocamentoService) : 
 
 
     [HttpGet("{id}")]
+    [Consumes("application/json")]
     public async Task<IActionResult> GetById(int id)
     {
         try

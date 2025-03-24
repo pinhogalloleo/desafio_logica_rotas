@@ -1,0 +1,53 @@
+
+#############################################################
+### Deslocamento controller
+#############################################################
+
+
+@baseUrl = http://localhost:5167
+@controller = {{baseUrl}}/api/deslocamento
+
+#############################################################
+### Insert - post - 1o
+POST {{controller}}
+Accept: application/json
+Content-Type: application/json
+
+{
+    "origem": "AAA",
+    "destino": "BBB",
+    "custo": 5.00
+}
+
+### Insert - post - 1o
+POST {{controller}}
+Accept: application/json
+Content-Type: application/json
+
+{
+    "origem": "BBB",
+    "destino": "CCC",
+    "custo": 5.00
+}
+
+### Insert - post - 1o
+POST {{controller}}
+Accept: application/json
+Content-Type: application/json
+
+{
+    "origem": "AAA",
+    "destino": "CCC",
+    "custo": 25.00
+}
+
+
+#############################################################
+### Get All
+GET {{controller}}
+
+
+#############################################################
+### Get 1
+GET {{controller}}/1
+

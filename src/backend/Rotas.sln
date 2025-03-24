@@ -3,17 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rotas.Api", "src\Rotas.Api\Rotas.Api.csproj", "{6F8DB5DF-3F4E-4FD4-808D-235D7C719D60}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rotas.Api", "Rotas.Api\Rotas.Api.csproj", "{6F8DB5DF-3F4E-4FD4-808D-235D7C719D60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rotas.Domain", "src\Rotas.Domain\Rotas.Domain.csproj", "{109DC2C0-6D49-4A01-AC6C-4E051D3D9890}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rotas.Domain", "Rotas.Domain\Rotas.Domain.csproj", "{109DC2C0-6D49-4A01-AC6C-4E051D3D9890}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rotas.Application", "src\Rotas.Application\Rotas.Application.csproj", "{C72F7C77-EE14-44E7-81EE-A2888BE3462A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0AB3BF05-4346-4AA6-1389-037BE0695223}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "tests\Tests.csproj", "{2EBDAD23-059D-4AC2-81A4-322174560E12}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rotas.Application", "Rotas.Application\Rotas.Application.csproj", "{C72F7C77-EE14-44E7-81EE-A2888BE3462A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
