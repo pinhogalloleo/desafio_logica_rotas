@@ -13,8 +13,8 @@ public class TestUpdate
     {
         // Arrange
         var path = "testUpdFail.json";
-        using var repository = new RepositoryCrudViagem(path);
-        var viagem = ViagemEntityFactory.FakeList(1)[0];
+        using var repository = new RepositoryCrudDeslocamento(path);
+        var viagem = DeslocamentoEntityFactory.FakeList(1)[0];
         viagem.Id = 1000; // neither this entity was added, nor it exists id 1000
 
         // Act + Assert
@@ -32,8 +32,8 @@ public class TestUpdate
     {
         // Arrange
         var path = "testUpdSuccess.json";
-        using var repository = new RepositoryCrudViagem(path);
-        var viagem = new Viagem
+        using var repository = new RepositoryCrudDeslocamento(path);
+        var viagem = new Deslocamento
         {
             Origem = "AAA",
             Destino = "BBB",
@@ -78,7 +78,7 @@ public class TestUpdate
     {
         // Arrange
         var path = "testUpdFailNull.json";
-        using var repository = new RepositoryCrudViagem(path);
+        using var repository = new RepositoryCrudDeslocamento(path);
 
         // Act
         var exception = await Record.ExceptionAsync(async () => await repository.UpdateAsync(null));
@@ -86,7 +86,7 @@ public class TestUpdate
         // Assert
         Assert.NotNull(exception);
         Assert.IsType<ArgumentNullException>(exception);
-        Assert.Contains("Objeto viagem não pode ser nulo".ToLowerInvariant(), exception.Message.ToLowerInvariant());
+        Assert.Contains("Objeto deslocamento não pode ser nulo".ToLowerInvariant(), exception.Message.ToLowerInvariant());
 
         // clean up
         repository.Dispose();

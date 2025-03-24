@@ -4,23 +4,23 @@ public class Grafo
 {
     public Dictionary<string, List<Adjacencia>> Adjacencias { get; private set; }
 
-    public Grafo(List<Viagem> viagens)
+    public Grafo(List<Deslocamento> viagens)
     {
         if (viagens == null)
             throw new ArgumentNullException(nameof(viagens));
             
         Adjacencias = new Dictionary<string, List<Adjacencia>>();
 
-        foreach (var viagem in viagens)
+        foreach (var deslocamento in viagens)
         {
-            if (!Adjacencias.ContainsKey(viagem.Origem))
-                Adjacencias[viagem.Origem] = new List<Adjacencia>();
+            if (!Adjacencias.ContainsKey(deslocamento.Origem))
+                Adjacencias[deslocamento.Origem] = new List<Adjacencia>();
 
-            Adjacencias[viagem.Origem].Add(new Adjacencia(viagem.Destino, viagem.Custo));
+            Adjacencias[deslocamento.Origem].Add(new Adjacencia(deslocamento.Destino, deslocamento.Custo));
 
             // Ensure the destination is also added as a key, even if it has no outgoing edges
-            if (!Adjacencias.ContainsKey(viagem.Destino))
-                Adjacencias[viagem.Destino] = new List<Adjacencia>();
+            if (!Adjacencias.ContainsKey(deslocamento.Destino))
+                Adjacencias[deslocamento.Destino] = new List<Adjacencia>();
         }
     }
 

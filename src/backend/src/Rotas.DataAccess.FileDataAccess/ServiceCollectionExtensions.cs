@@ -13,7 +13,7 @@ namespace Rotas.DataAccess.FileDataAccess.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection SetupFileDataAccess(this IServiceCollection services, IConfiguration? configuration)
+    public static IServiceCollection SetupInfraFileDataAccess(this IServiceCollection services, IConfiguration? configuration)
     {
         if (configuration == null)
             throw new ArgumentNullException(nameof(configuration));
@@ -22,7 +22,7 @@ public static class ServiceCollectionExtensions
         if (string.IsNullOrEmpty(path))
             throw new ArgumentNullException(nameof(configuration), "PersistenceFileName not found in configuration");
 
-        services.AddSingleton<IRepositoryCrud<Viagem>>(provider => new RepositoryCrudViagem(path));
+        services.AddSingleton<IRepositoryCrud<Deslocamento>>(provider => new RepositoryCrudDeslocamento(path));
         return services;
     }
 }

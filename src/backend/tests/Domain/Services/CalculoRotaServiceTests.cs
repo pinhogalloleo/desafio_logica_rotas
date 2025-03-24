@@ -5,9 +5,8 @@ using Rotas.Domain.Interfaces;
 using Rotas.Domain.Entities;
 using Rotas.Domain.Exceptions;
 using Tests.Domain.Entities;
-using Rotas.DataAccess.FileDataAccess;
 using Rotas.Domain.Entities.Grafo;
-
+using Rotas.DataAccess.FileDataAccess;
 
 namespace Tests.Domain.Services;
 public class CalculoRotaServiceTests
@@ -16,9 +15,9 @@ public class CalculoRotaServiceTests
     public async Task Test_CalculateRoute_RaiseNaoEncontradoException_WhenNoRoutesFound()
     {
         // Arrange
-        var mockRepository = new Mock<IRepositoryCrud<Viagem>>();
-        mockRepository.Setup(x => x.GetAllAsync()).Returns(Task.FromResult(new List<Viagem>()));
-        var service = new CalculoRotaService(Mock.Of<IRepositoryCrud<Viagem>>());
+        var mockRepository = new Mock<IRepositoryCrud<Deslocamento>>();
+        mockRepository.Setup(x => x.GetAllAsync()).Returns(Task.FromResult(new List<Deslocamento>()));
+        var service = new CalculoRotaService(Mock.Of<IRepositoryCrud<Deslocamento>>());
 
         // Act
         async Task act() => await service.CalcularRotaAsync("AAA", "BBB");
@@ -33,25 +32,25 @@ public class CalculoRotaServiceTests
     {
         // Arrange
         var path = "testCalcRouteSuccess.json";
-        using var repository = new RepositoryCrudViagem(path);
+        using var repository = new RepositoryCrudDeslocamento(path);
 
-        var viagens = ViagemEntityFactory.FakeList(3);
+        var deslocamentos = DeslocamentoEntityFactory.FakeList(3);
 
-        viagens[0].Origem = "AAA";
-        viagens[0].Destino = "BBB";
-        viagens[0].Custo = 10;
+        deslocamentos[0].Origem = "AAA";
+        deslocamentos[0].Destino = "BBB";
+        deslocamentos[0].Custo = 10;
 
-        viagens[1].Origem = "BBB";
-        viagens[1].Destino = "CCC";
-        viagens[1].Custo = 10;
+        deslocamentos[1].Origem = "BBB";
+        deslocamentos[1].Destino = "CCC";
+        deslocamentos[1].Custo = 10;
 
-        viagens[2].Origem = "AAA";
-        viagens[2].Destino = "CCC";
-        viagens[2].Custo = 30;
+        deslocamentos[2].Origem = "AAA";
+        deslocamentos[2].Destino = "CCC";
+        deslocamentos[2].Custo = 30;
 
-        await repository.InsertAsync(viagens[0]);
-        await repository.InsertAsync(viagens[1]);
-        await repository.InsertAsync(viagens[2]);
+        await repository.InsertAsync(deslocamentos[0]);
+        await repository.InsertAsync(deslocamentos[1]);
+        await repository.InsertAsync(deslocamentos[2]);
 
         var service = new CalculoRotaService(repository);
 

@@ -8,17 +8,17 @@ namespace Tests.Infra.DataAccess.FileDataAccess;
 public class TestInsert
 {
     [Fact]
-    public async Task TestRepositoryCrudViagem_AddedSuccessfully()
+    public async Task TestRepositoryCrudDeslocamento_AddedSuccessfully()
     {
         // Arrange
         var path = "testInfraFileDataAccessInsertSuccess.json";
-        var viagem = ViagemEntityFactory.FakeList(1)[0];
+        var deslocamento = DeslocamentoEntityFactory.FakeList(1)[0];
 
         // Act
-        using var repository = new RepositoryCrudViagem(path);
+        using var repository = new RepositoryCrudDeslocamento(path);
         var lista = await repository.GetAllAsync();
         var qtd = lista.Count;
-        var id = await repository.InsertAsync(viagem);
+        var id = await repository.InsertAsync(deslocamento);
 
         // Assert
         Assert.NotNull(repository);
@@ -32,19 +32,19 @@ public class TestInsert
     }
 
     [Fact]
-    public async Task TestRepositoryCrudViagem_AddedSuccessfullyWithMultipleItems()
+    public async Task TestRepositoryCrudDeslocamento_AddedSuccessfullyWithMultipleItems()
     {
         // Arrange
         var expectedQtd = 3;
         var path = "testInfraFileDataAccessInsertSuccessMultiple.json";
-        var viagens = ViagemEntityFactory.FakeList(expectedQtd);
+        var viagens = DeslocamentoEntityFactory.FakeList(expectedQtd);
 
         // Act
-        using var repository = new RepositoryCrudViagem(path);
+        using var repository = new RepositoryCrudDeslocamento(path);
         var idsList = new List<int>();
-        foreach (var viagem in viagens)
+        foreach (var deslocamento in viagens)
         {
-            var id = await repository.InsertAsync(viagem);
+            var id = await repository.InsertAsync(deslocamento);
             idsList.Add(id);
         }
         var lista = await repository.GetAllAsync();
@@ -65,21 +65,21 @@ public class TestInsert
 
     [Fact]
     // test InsertAsync method with null entity, raising ArgumentNullException
-    public async Task TestRepositoryCrudViagem_InsertAsyncWithNullEntity()
+    public async Task TestRepositoryCrudDeslocamento_InsertAsyncWithNullEntity()
     {
         // Arrange
         var path = "testInfraFileDataAccessInsertNullEntity.json";
-        Viagem? viagem = null;
+        Deslocamento? deslocamento = null;
 
         // Act
-        using var repository = new RepositoryCrudViagem(path);
-        var ex = await Assert.ThrowsAsync<ArgumentNullException>(() => repository.InsertAsync(viagem));
+        using var repository = new RepositoryCrudDeslocamento(path);
+        var ex = await Assert.ThrowsAsync<ArgumentNullException>(() => repository.InsertAsync(deslocamento));
 
         // Assert
         Assert.NotNull(repository);
         Assert.NotNull(ex);
         Assert.Equal("entity", ex.ParamName);
-        Assert.Contains("Objeto viagem não pode ser nulo".ToLowerInvariant(), ex.Message.ToLowerInvariant());
+        Assert.Contains("Objeto deslocamento não pode ser nulo".ToLowerInvariant(), ex.Message.ToLowerInvariant());
 
         // clean up
         repository.Dispose();

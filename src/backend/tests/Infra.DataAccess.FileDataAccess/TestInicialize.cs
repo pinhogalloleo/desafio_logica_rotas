@@ -14,7 +14,7 @@ public class TestInicialize
         var path = "test1sExec.json";
 
         // Act
-        using var repository = new RepositoryCrudViagem(path);
+        using var repository = new RepositoryCrudDeslocamento(path);
 
         // Assert
         Assert.NotNull(repository);
@@ -32,7 +32,7 @@ public class TestInicialize
     {
         // Arrange
         var path = "test2ndExec.json";
-        var repository = new RepositoryCrudViagem(path);
+        var repository = new RepositoryCrudDeslocamento(path);
 
         // Act
         var lista = await repository.GetAllAsync();
@@ -46,7 +46,7 @@ public class TestInicialize
         repository.Dispose();
 
         // doing again to test if it loads the data
-        repository = new RepositoryCrudViagem(path);
+        repository = new RepositoryCrudDeslocamento(path);
         lista = await repository.GetAllAsync();
 
         // Assert

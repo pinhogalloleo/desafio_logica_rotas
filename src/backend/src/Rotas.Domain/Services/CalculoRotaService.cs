@@ -7,9 +7,9 @@ using Rotas.Domain.Entities.Grafo;
 
 namespace Rotas.Domain.Services;
 
-public class CalculoRotaService(IRepositoryCrud<Viagem> repository) : ICalculoRotaService
+public class CalculoRotaService(IRepositoryCrud<Deslocamento> repository) : ICalculoRotaService
 {
-    private readonly IRepositoryCrud<Viagem> _repository = repository;
+    private readonly IRepositoryCrud<Deslocamento> _repository = repository;
 
     /// <summary>
     /// Localiza a melhor rota entre dois pontos com lógica parecida com Grafo
@@ -18,7 +18,7 @@ public class CalculoRotaService(IRepositoryCrud<Viagem> repository) : ICalculoRo
     {
         var viagens = await _repository.GetAllAsync();
         if (viagens == null || viagens.Count == 0)
-            throw new NaoEncontradoException("Nenhuma viagem encontrada");
+            throw new NaoEncontradoException("Nenhuma deslocamento encontrada");
 
         var grafo = new Grafo(viagens);
         var rota = EncontrarMelhorRota(grafo, origem, destino);

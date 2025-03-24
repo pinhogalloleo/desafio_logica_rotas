@@ -1,9 +1,9 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace Rotas.Application.UseCases.CalculoRota;
+namespace Rotas.Application.UseCases.DeslocamentoCrud.Insert;
 
-public class CalculoRotaDto
+public class InsertDeslocamentoDto
 {
     [MinLength(3, ErrorMessage = "Origem deve ter pelo menos 3 letras")]
     [MaxLength(15, ErrorMessage = "Origem deve ter no máximo 15 letras")]
@@ -14,4 +14,8 @@ public class CalculoRotaDto
     [MaxLength(15, ErrorMessage = "Destino deve ter no máximo 15 letras")]
     [Required(ErrorMessage = "Destino é obrigatório")]
     public required string Destino { get; set; }
+
+    [Range(0.01, 999.99, ErrorMessage = "Custo deve ser mínimo de 0.01 e máximo de 999.99")]
+    [Required(ErrorMessage = "Custo é obrigatório")]
+    public required decimal Custo { get; set; }
 }

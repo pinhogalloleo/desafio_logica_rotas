@@ -1,3 +1,4 @@
+
 using Rotas.Domain.Entities;
 using Rotas.Domain.Entities.Grafo;
 
@@ -9,7 +10,7 @@ public class GrafoTest
     public void Test_Grafo_ThrowsArgumentNullException_WhenViagensIsNull()
     {
         // Arrange
-        List<Viagem>? viagens = null;
+        List<Deslocamento>? viagens = null;
 
         // Act
         void act() => new Grafo(viagens!);

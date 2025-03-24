@@ -10,21 +10,21 @@ public class TestSearchByExpression
     {
         // Arrange
         var path = "testSearchByExpression.json";
-        var viagens = ViagemEntityFactory.FakeList(3);
-        var viagem = viagens[0];
+        var deslocamentos = DeslocamentoEntityFactory.FakeList(3);
+        var deslocamento = deslocamentos[0];
 
         // Act
-        using var repository = new RepositoryCrudViagem(path);
-        foreach (var v in viagens)
+        using var repository = new RepositoryCrudDeslocamento(path);
+        foreach (var v in deslocamentos)
             await repository.InsertAsync(v);
 
-        var lista = await repository.SearchByExpressionAsync(v => v.Id == viagem.Id);
+        var lista = await repository.SearchByExpressionAsync(v => v.Id == deslocamento.Id);
 
         // Assert
         Assert.NotNull(repository);
         Assert.NotNull(lista);
         Assert.Single(lista);
-        Assert.Equal(viagem.Id, lista[0].Id);
+        Assert.Equal(deslocamento.Id, lista[0].Id);
 
         // clean up
         repository.Dispose();
@@ -37,11 +37,11 @@ public class TestSearchByExpression
     {
         // Arrange
         var path = "testSearchByExpressionNothing.json";
-        var viagens = ViagemEntityFactory.FakeList(3);
+        var deslocamentos = DeslocamentoEntityFactory.FakeList(3);
 
         // Act
-        using var repository = new RepositoryCrudViagem(path);
-        foreach (var v in viagens)
+        using var repository = new RepositoryCrudDeslocamento(path);
+        foreach (var v in deslocamentos)
             await repository.InsertAsync(v);
 
         var lista = await repository.SearchByExpressionAsync(v => v.Id == 0);

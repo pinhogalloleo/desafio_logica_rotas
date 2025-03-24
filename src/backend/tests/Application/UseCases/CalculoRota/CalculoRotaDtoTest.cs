@@ -1,6 +1,6 @@
 
 using Moq;
-using Rotas.Application.UseCases.CalculoRota.Dto;
+using Rotas.Application.UseCases.CalculoRota;
 
 namespace Tests.Application.UseCases.CalculoRota;
 

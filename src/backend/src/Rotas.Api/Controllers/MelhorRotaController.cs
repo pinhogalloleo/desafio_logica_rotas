@@ -1,26 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Mvc;
+using Rotas.Application.Services;
 using Rotas.Application.UseCases.CalculoRota;
-using Rotas.Application.UseCases.CalculoRota.Dto;
 
 namespace Rotas.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
 
-public class MelhorRotaController(CalculoRotaUseCase calculoRotaUseCase) : ControllerBase
+public class MelhorRotaController(ICalculoMelhorRotaService calculoMelhorRotaService) : ControllerBase
 {
-    private readonly CalculoRotaUseCase _calculoRotaUseCase = calculoRotaUseCase;
+    private readonly ICalculoMelhorRotaService _calculoMelhorRotaService = calculoMelhorRotaService;
 
     [HttpGet]
     public async Task<IActionResult> Get([FromQuery] CalculoRotaDto dto)
     {
         try
         {
-            var rota = await _calculoRotaUseCase.ExecuteAsync(dto);
+            var rota = await _calculoMelhorRotaService.CalcularMelhorRotaAsync(dto);
             if (rota == null)
                 return NotFound();
 

@@ -1,24 +1,28 @@
 
 using Moq;
 using Rotas.Application.UseCases.CalculoRota;
-using Rotas.Application.UseCases.CalculoRota.Dto;
+using Rotas.Domain.Entities;
 using Rotas.Domain.Entities.Grafo;
 using Rotas.Domain.Interfaces;
+using Rotas.Domain.Services;
 
 namespace Tests.Application.UseCases.CalculoRota;
 
 public class CalculoRotaUseCaseTest
 {
     [Fact]
-    public async Task TestExecute_ReturnEntityNotNull()
+    public async Task TestExecute_ReturnEntity_WhenDtoIsValid()
     {
-        // Arrange
-        var calculoRotaService = new Mock<ICalculoRotaService>();
-        var useCase = new CalculoRotaUseCase(calculoRotaService.Object);
-        var dto = new CalculoRotaDto { Origem = "A", Destino = "B" };
-        var rotaInput = new Rota() { Caminho = ["A", "B"], CustoTotal = 10 };
+        // Arrange        
+        var dto = new CalculoRotaDto { Origem = "AAA", Destino = "BBB" };
+        var rota = new Rota() { Caminho = ["AAA", "BBB"], CustoTotal = 10 };
 
-        calculoRotaService.Setup(x => x.CalcularRotaAsync(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(rotaInput);
+        var mockCalculoRotaService = new Mock<ICalculoRotaService>();
+        mockCalculoRotaService.Setup(x => x.CalcularRotaAsync(dto.Origem, dto.Destino)).ReturnsAsync(rota);
+        var calculoRotaService = mockCalculoRotaService.Object;
+
+        var useCase = new CalculoRotaUseCase(calculoRotaService);
+
 
         // Act
         Rota? rotaReturn = await useCase.ExecuteAsync(dto);
@@ -31,11 +35,13 @@ public class CalculoRotaUseCaseTest
     public async Task TestExecute_ReturnEntityNull()
     {
         // Arrange
-        var calculoRotaService = new Mock<ICalculoRotaService>();
-        var useCase = new CalculoRotaUseCase(calculoRotaService.Object);
-        var dto = new CalculoRotaDto { Origem = "A", Destino = "B" };
+        var dto = new CalculoRotaDto { Origem = "AAA", Destino = "BBB" };
 
-        calculoRotaService.Setup(x => x.CalcularRotaAsync(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync((Rota?)null);
+        var mockCalculoRotaService = new Mock<ICalculoRotaService>();
+        mockCalculoRotaService.Setup(x => x.CalcularRotaAsync(dto.Origem, dto.Destino)).ReturnsAsync((Rota?)null);
+
+        var calculoRotaService = mockCalculoRotaService.Object;
+        var useCase = new CalculoRotaUseCase(calculoRotaService);
 
         // Act
         Rota? rotaReturn = await useCase.ExecuteAsync(dto);

@@ -3,8 +3,8 @@ using Moq;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Rotas.Domain.Interfaces;
-using Rotas.Domain.Entities;
 using Rotas.DataAccess.FileDataAccess.DependencyInjection;
+using Rotas.Domain.Entities;
 
 namespace Tests.Infra.DataAccess.FileDataAccess;
 
@@ -21,11 +21,11 @@ public class DependencyInjectionTest
         configuration.Setup(x => x["PersistenceFileName"]).Returns("test.json");
 
         // Act
-        services.SetupFileDataAccess(configuration.Object);
+        services.SetupInfraFileDataAccess(configuration.Object);
 
         // Assert
         var serviceProvider = services.BuildServiceProvider();
-        var repository = serviceProvider.GetService<IRepositoryCrud<Viagem>>();
+        var repository = serviceProvider.GetService<IRepositoryCrud<Deslocamento>>();
         Assert.NotNull(repository);
     }
 
@@ -38,7 +38,7 @@ public class DependencyInjectionTest
 
         // Act
         IConfiguration? config = GetConfiguration();
-        Action act = () => services.SetupFileDataAccess(config);
+        Action act = () => services.SetupInfraFileDataAccess(config);
 
         // Assert
         var ex = Assert.Throws<ArgumentNullException>(act);
@@ -57,7 +57,7 @@ public class DependencyInjectionTest
         configuration.Setup(x => x["PersistenceFileName"]).Returns("");
 
         // Act
-        Action act = () => services.SetupFileDataAccess(configuration.Object);
+        Action act = () => services.SetupInfraFileDataAccess(configuration.Object);
 
         // Assert
         var ex = Assert.Throws<ArgumentNullException>(act);

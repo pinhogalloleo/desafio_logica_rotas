@@ -4,9 +4,9 @@ using Rotas.Domain.Exceptions;
 
 namespace Rotas.Application.UseCases;
 
-public abstract class BaseUseCase
+public abstract class BaseUseCase<TRequest> where TRequest : class
 {
-    protected private static void ValidateDto<T>(T? dto) where T : class
+    protected static void ValidateDto(TRequest? dto)
     {
         if (dto == null)
             throw new ArgumentNullException(nameof(dto), "Objeto dto não pode ser nulo");

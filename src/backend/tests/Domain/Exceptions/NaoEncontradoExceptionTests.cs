@@ -1,5 +1,3 @@
-using System;
-using Xunit;
 
 using Rotas.Domain.Exceptions;
 namespace Tests.Domain.Exceptions;
