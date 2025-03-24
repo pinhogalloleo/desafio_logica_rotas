@@ -54,7 +54,7 @@ public class DeslocamentoController(IDeslocamentoService deslocamentoService) : 
     }//..UpdateDeslocamento [HttpPut]
 
 
-    [HttpDelete("id")]
+    [HttpDelete("{id}")]
     [Consumes("application/json")]
     public async Task<IActionResult> DeleteDeslocamento(int id)
     {

@@ -3,7 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <ImplicitUsings>enable</ImplicitUsings>    
+    <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,7 +17,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Rotas.Domain\Rotas.Domain.csproj" />
     <ProjectReference Include="..\Rotas.Application\Rotas.Application.csproj" />
-    <ProjectReference Include="..\Rotas.DataAccess.FileDataAccess\Rotas.DataAccess.FileDataAccess.csproj" />
+    <ProjectReference
+      Include="..\Rotas.DataAccess.FileDataAccess\Rotas.DataAccess.FileDataAccess.csproj" />
   </ItemGroup>
 
 </Project>
