@@ -1,6 +1,6 @@
 
 # Args with their default values
-ARG PORT=4999
+ARG PORT=8080
 ARG ASPNETCORE_ENVIRONMENT="Development"
 ARG ASPNETCORE_URLS=http://+:$PORT
 
