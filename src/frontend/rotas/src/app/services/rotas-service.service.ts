@@ -20,8 +20,8 @@ export interface Rota {
 })
 
 export class RotasService {
-	private readonly rotasCrudApiUrl = 'http://localhost:5167/api/deslocamento';
-	private readonly melhorRotaApiUrl = 'http://localhost:5167/api/melhorrota';
+	private readonly rotasCrudApiUrl = 'http://localhost:4999/api/deslocamento';
+	private readonly melhorRotaApiUrl = 'http://localhost:4999/api/melhorrota';
 	private readonly httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 	
 	constructor(private readonly http: HttpClient) { }

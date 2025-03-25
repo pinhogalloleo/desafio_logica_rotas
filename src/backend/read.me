@@ -1,0 +1,30 @@
+
+possible values for variables:
+
+ASPNETCORE_ENVIRONMENT (default: Development)
+  Development ==> supposed to run on local machine
+  Test ==> supposed to be used as User Test or automated test
+  Production ==> !!!
+
+PORT (default: 4999)
+  custom port to map the endpoint
+
+
+EXAMPLES:
+
+1) build as image "calc-rotas-bff-img", in Production env, and default port (4999)
+docker build -t "calc-rotas-bff-img" --build-arg ASPNETCORE_ENVIRONMENT="Production" -f Dockerfile .
+
+2) build as image "debug-img", in default env (Development) and specific port 5432
+docker build -t "debug-img" --build-arg PORT=5432 -f Dockerfile .
+
+3) build as image "def-rotas-img", in default env (Development), and default port (4999)
+docker build -t "def-rotas-img" -f Dockerfile .
+
+
+OVERWRITE values for run\start:
+after image created, it is possible to overwrite values, like port.
+
+Example: here we map our port 5432 (from our OS) to bind to container port 5555
+docker run -it --rm --name "rotas-tmp-container" -p "5432:5555" "cal-rotas-bff-img"
+
