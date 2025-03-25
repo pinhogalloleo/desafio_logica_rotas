@@ -14,7 +14,7 @@ namespace Rotas.Api.Controllers;
 public class DeslocamentoController(IDeslocamentoService deslocamentoService) : ControllerBase
 {
     private readonly IDeslocamentoService _deslocamentoService = deslocamentoService;
-    
+
 
     [HttpPost]
     [Consumes("application/json")]
@@ -63,7 +63,7 @@ public class DeslocamentoController(IDeslocamentoService deslocamentoService) : 
 
         try
         {
-            var deleteDto = new DeleteDeslocamentoDto(){ Id = id };
+            var deleteDto = new DeleteDeslocamentoDto() { Id = id };
             await _deslocamentoService.DeleteDeslocamentoAsync(deleteDto);
             return Ok("Entidade removida");
         }
@@ -80,7 +80,7 @@ public class DeslocamentoController(IDeslocamentoService deslocamentoService) : 
     {
         try
         {
-            var dto = new GetByIdDeslocamentoDto(){ Id = id };
+            var dto = new GetByIdDeslocamentoDto() { Id = id };
             var entity = await _deslocamentoService.GetByIdAsync(dto);
             return Ok(entity);
         }

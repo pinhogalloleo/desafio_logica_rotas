@@ -1,0 +1,62 @@
+<div class="container mt-4">
+  <h2>Excluir?</h2>
+
+  <form *ngIf="deslocamento" (ngSubmit)="excluir()">
+    <fieldset disabled>
+      <div class="mb-3">
+        <label htmlFor="id" class="form-label">Id</label>
+        <input
+          type="text"
+          id="id"
+          name="id"
+          class="form-control"
+          [(ngModel)]="deslocamento.id"
+          readonly
+        />
+      </div>
+
+      <div class="mb-3">
+        <label htmlFor="origem" class="form-label">Origem</label>
+        <input
+          type="text"
+          id="origem"
+          name="origem"
+          class="form-control"
+          [(ngModel)]="deslocamento.origem"
+          readonly
+        />
+      </div>
+
+      <div class="mb-3">
+        <label htmlFor="destino" class="form-label">Destino</label>
+        <input
+          type="text"
+          id="destino"
+          name="destino"
+          class="form-control"
+          [(ngModel)]="deslocamento.destino"
+          readonly
+        />
+      </div>
+
+      <div class="mb-3">
+        <label htmlFor="custo" class="form-label">Custo</label>
+        <input
+          type="number"
+          id="custo"
+          name="custo"
+          class="form-control"
+          [(ngModel)]="deslocamento.custo"
+          readonly
+        />
+      </div>
+    </fieldset>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-success">Excluir</button>
+      <button type="button" class="btn btn-secondary" (click)="cancelar()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

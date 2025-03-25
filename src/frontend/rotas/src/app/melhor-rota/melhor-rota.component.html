@@ -1,0 +1,46 @@
+<div class="container mt-4">
+  <h2>Calcular Melhor Rota</h2>
+  <button class="btn btn-secondary mt-3" (click)="cancelar()">Cancelar</button>
+  <button class="btn btn-primary mt-3" (click)="calcularMelhorRota()">
+    Calcular
+  </button>
+
+  <br /><br />
+  <div class="form-group">
+    <label for="origem">Origem:</label>
+    <input
+      type="text"
+      class="form-control"
+      id="origem"
+      [(ngModel)]="origem"
+      name="origem"
+      required
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="destino">Destino:</label>
+    <input
+      type="text"
+      class="form-control"
+      id="destino"
+      [(ngModel)]="destino"
+      name="destino"
+      required
+    />
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="rota" class="mt-4">
+    <h3>Melhor Rota:</h3>
+    <p><strong>Custo: {{ rota.custoTotal }} </strong></p>
+    <h4>Percurso:</h4>
+    <ul>
+        <li *ngFor="let ponto of rota.caminho">{{ponto}}</li>
+    </ul>    
+  </div>
+
+</div>

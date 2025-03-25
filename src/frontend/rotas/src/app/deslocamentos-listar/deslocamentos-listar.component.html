@@ -1,0 +1,40 @@
+
+<div class="container mb-3">
+  <a [routerLink]="['/deslocamentos-criar']" class="btn btn-secondary">Novo</a>
+  <a [routerLink]="['/melhor-rota']" class="btn btn-success">Calcular Melhor Rota</a>
+  <h2>Lista:</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Origem</th>
+        <th>Destino</th>
+        <th>Custo</th>
+        <th>Acoes</th>
+      </tr>
+    </thead>
+    
+    <tbody *ngIf="deslocamentos && deslocamentos.length > 0">
+      <tr *ngFor="let d of deslocamentos">
+        <td>{{ d.id }}</td>
+        <td>{{ d.origem }}</td>
+        <td>{{ d.destino }}</td>
+        <td>{{ d.custo }}</td>
+        <td>
+          <a
+            [routerLink]="['/deslocamentos-editar', d.id]"
+            class="btn btn-primary p-2"
+            >Editar</a
+          >
+          <a
+            [routerLink]="['/deslocamentos-excluir', d.id]"
+            class="btn btn-danger p-2"
+            >Excluir</a
+          >
+        </td>
+      </tr>
+    </tbody>
+
+    <tfoot></tfoot>
+  </table>
+</div>

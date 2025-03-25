@@ -1,0 +1,28 @@
+
+<div class="container mt-4">
+	<h2>Criar</h2>
+	
+	<form (ngSubmit)="criar()">	
+		<div class="mb-3">
+			<label htmlFor="origem" class="form-label">Origem</label>
+			<input type="text" id="origem" name="origem" class="form-control" [(ngModel)]="deslocamento.origem" placeholder="Origem..." required >
+			
+		</div>
+		
+		<div class="mb-3">
+			<label htmlFor="destino" class="form-label">Destino</label>
+			<input type="text" id="destino" name="destino" class="form-control" [(ngModel)]="deslocamento.destino" placeholder="Destino..." required >
+		</div>
+		
+		<div class="mb-3">
+			<label htmlFor="custo" class="form-label">Custo</label>
+			<input type="number" id="custo" name="custo" class="form-control" [(ngModel)]="deslocamento.custo" placeholder="Custo..." required >
+		</div>
+		
+		<div class="form-group">
+			<button type="submit" class="btn btn-success">Salvar</button>
+			<button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+		</div>
+	</form>
+	
+</div>
