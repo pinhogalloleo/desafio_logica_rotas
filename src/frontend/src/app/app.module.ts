@@ -11,6 +11,7 @@ import { DeslocamentosEditarComponent } from './deslocamentos-editar/deslocament
 import { DeslocamentosExcluirComponent } from './deslocamentos-excluir/deslocamentos-excluir.component';
 import { MelhorRotaComponent } from './melhor-rota/melhor-rota.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -1,8 +1,15 @@
 
+##
+##	ATTENTION!
+##  If change port, the frontend may crash, it is mapped to consume backend at port 4999
+##
+
 # Args with their default values
-ARG PORT=8080
+ARG PORT=4999
+# possible values for environment: Development, Test
 ARG ASPNETCORE_ENVIRONMENT="Development"
 ARG ASPNETCORE_URLS=http://+:$PORT
+
 
 # Use the official .NET SDK image to build the application
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
@@ -30,12 +37,10 @@ WORKDIR /app
 COPY --from=build /publish .
 
 # refer locally the global var, kinda like a python variable scope
-ARG PORT
 ARG ASPNETCORE_ENVIRONMENT
 ARG ASPNETCORE_URLS
 
 # Set the environment variable for the runtime
-ENV PORT=$PORT
 ENV ASPNETCORE_ENVIRONMENT=$ASPNETCORE_ENVIRONMENT
 ENV ASPNETCORE_URLS=$ASPNETCORE_URLS
 
@@ -43,7 +48,7 @@ ENV ASPNETCORE_URLS=$ASPNETCORE_URLS
 COPY ./Rotas.Api/appsettings.${ASPNETCORE_ENVIRONMENT}.json ./appsettings.${ASPNETCORE_ENVIRONMENT}.json
 
 # Expose the DEFAULT port the application listens on
-EXPOSE 4999
+EXPOSE 8080
 
 # Set the entry point for the container
 ENTRYPOINT ["dotnet", "Rotas.Api.dll"]

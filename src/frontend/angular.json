@@ -41,11 +41,17 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
-			  "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
-			]
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
-            "production": {
+            "Production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.Production.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -60,25 +66,54 @@
               ],
               "outputHashing": "all"
             },
-            "development": {
+            "Test": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.Test.ts"
+                }
+              ]
+            },
+            "Development": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.Development.ts"
+                }
+              ],
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            },
+			"Default": {            
+			  "fileReplacements": [],
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "Default"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "port": 4998
+          },
           "configurations": {
-            "production": {
-              "buildTarget": "rotas:build:production"
+            "Production": {
+              "buildTarget": "rotas:build:Production"
             },
-            "development": {
-              "buildTarget": "rotas:build:development"
+            "Test": {
+              "buildTarget": "rotas:build:Test"
+            },
+            "Development": {
+              "buildTarget": "rotas:build:Development"
+            },
+            "Default": {
+              "buildTarget": "rotas:build:Default"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "Default"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"

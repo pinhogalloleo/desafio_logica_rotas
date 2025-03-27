@@ -1,0 +1,19 @@
+name: "rotas-compose-service-test"
+
+services:
+    test-backend-api:
+        build:
+            context: ./src/backend/
+            dockerfile: Dockerfile
+            args:
+                PORT: 4999
+                ASPNETCORE_ENVIRONMENT: "Test"
+        ports:
+            - "4999:4999"
+        networks:
+            - "calculo-rotas-network-test"
+    
+networks:
+    "calculo-rotas-network-test":
+        driver: bridge
+

@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface Deslocamento {
 	id: number;
@@ -20,8 +21,9 @@ export interface Rota {
 })
 
 export class RotasService {
-	private readonly rotasCrudApiUrl = 'http://localhost:4999/api/deslocamento';
-	private readonly melhorRotaApiUrl = 'http://localhost:4999/api/melhorrota';
+	private readonly apiUrl = environment.backendUrl;
+	private readonly rotasCrudApiUrl = `${this.apiUrl}/deslocamento`;
+	private readonly melhorRotaApiUrl = `${this.apiUrl}/melhorrota`;
 	private readonly httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 	
 	constructor(private readonly http: HttpClient) { }

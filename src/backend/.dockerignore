@@ -1,0 +1,32 @@
+# Ignore .NET build artifacts
+bin
+Bin
+obj
+Obj
+publish
+Publish
+TestResults
+
+# Ignore temporary files
+*.log
+*.tmp
+*.bak
+*.old
+*.orig
+
+# Ignore IDE/editor-specific files
+.vscode
+.idea
+*.swp
+*.suo
+*.user
+.DS_Store
+Thumbs.db
+
+# Ignore Git-related files
+.git
+.gitignore
+
+# Ignore Docker-related files (if not needed in the build context)
+docker-compose.override.yml
+.env

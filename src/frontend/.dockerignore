@@ -1,0 +1,37 @@
+# Ignore Node.js dependencies
+node_modules
+
+# Ignore Angular build output
+dist
+out-tsc
+
+# Ignore test coverage reports
+coverage
+
+# Ignore environment files (if not needed in the build context)
+# WRONG !! it we ignore, it wont build correctly !!!
+# src/environments/environment*.ts
+
+# Ignore temporary files
+*.log
+*.tmp
+*.bak
+*.old
+*.orig
+
+# Ignore IDE/editor-specific files
+.vscode
+.idea
+*.swp
+*.suo
+*.user
+.DS_Store
+Thumbs.db
+
+# Ignore Git-related files
+.git
+.gitignore
+
+# Ignore package manager lock files (optional, if not needed)
+package-lock.json
+yarn.lock
