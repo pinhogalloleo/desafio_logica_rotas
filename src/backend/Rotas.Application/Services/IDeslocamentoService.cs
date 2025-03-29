@@ -13,7 +13,7 @@ namespace Rotas.Application.Services
         Task UpdateDeslocamentoAsync(UpdateDeslocamentoDto dto);
         Task DeleteDeslocamentoAsync(DeleteDeslocamentoDto dto);
         Task<Deslocamento> GetByIdAsync(GetByIdDeslocamentoDto dto);
-        Task<List<Deslocamento>> GetAllAsync();
-        
+        Task<IEnumerable<Deslocamento>> GetAllAsync();
+
     }
 }

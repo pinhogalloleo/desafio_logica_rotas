@@ -16,14 +16,14 @@ public class DeslocamentoService : IDeslocamentoService
     private readonly IUseCase<UpdateDeslocamentoDto, Task> _updateDeslocamentoUseCase;
     private readonly IUseCase<DeleteDeslocamentoDto, Task> _deleteDeslocamentoUseCase;
     private readonly IUseCase<GetByIdDeslocamentoDto, Task<Deslocamento>> _getByIdDeslocamentoUseCase;
-    private readonly IUseCase<Task<List<Deslocamento>>> _getAllDeslocamentoUseCase;
+    private readonly IUseCase<Task<IEnumerable<Deslocamento>>> _getAllDeslocamentoUseCase;
 
     public DeslocamentoService(
         IUseCase<InsertDeslocamentoDto, Task<int>> insertDeslocamentoUseCase,
         IUseCase<UpdateDeslocamentoDto, Task> updateDeslocamentoUseCase,
         IUseCase<DeleteDeslocamentoDto, Task> deleteDeslocamentoUseCase,
         IUseCase<GetByIdDeslocamentoDto, Task<Deslocamento>> getByIdDeslocamentoUseCase,
-        IUseCase<Task<List<Deslocamento>>> getAllDeslocamentoUseCase)
+        IUseCase<Task<IEnumerable<Deslocamento>>> getAllDeslocamentoUseCase)
     {
         _insertDeslocamentoUseCase = insertDeslocamentoUseCase;
         _updateDeslocamentoUseCase = updateDeslocamentoUseCase;
@@ -44,6 +44,6 @@ public class DeslocamentoService : IDeslocamentoService
     public async Task<Deslocamento> GetByIdAsync(GetByIdDeslocamentoDto dto) =>
         await this._getByIdDeslocamentoUseCase.ExecuteAsync(dto);
 
-    public async Task<List<Deslocamento>> GetAllAsync() =>
+    public async Task<IEnumerable<Deslocamento>> GetAllAsync() =>
         await this._getAllDeslocamentoUseCase.ExecuteAsync();
 }

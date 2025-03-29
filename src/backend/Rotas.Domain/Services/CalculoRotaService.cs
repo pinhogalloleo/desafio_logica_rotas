@@ -1,4 +1,3 @@
-
 using Rotas.Domain.Entities;
 using Rotas.Domain.Exceptions;
 using Rotas.Domain.Interfaces;
@@ -17,15 +16,15 @@ public class CalculoRotaService(IRepositoryCrud<Deslocamento> repository) : ICal
     public async Task<Rota?> CalcularRotaAsync(string origem, string destino)
     {
         var viagens = await _repository.GetAllAsync();
-        if (viagens == null || viagens.Count == 0)
-            throw new NaoEncontradoException("Nenhuma deslocamento encontrada");
+        if (viagens == null || viagens.Count() == 0)
+            throw new NaoEncontradoException("Nenhum deslocamento encontrado para calcular a rota.");
 
         var grafo = new Grafo(viagens);
-        var rota = EncontrarMelhorRota(grafo, origem, destino);
+        var rota = EncontrarMelhorRota(grafo, origem, destino, viagens);
         return rota;
     }
 
-    private static Rota? EncontrarMelhorRota(Grafo grafo, string origem, string destino)
+    private static Rota? EncontrarMelhorRota(Grafo grafo, string origem, string destino, IEnumerable<Deslocamento> deslocamentos)
     {
         var distancias = new Dictionary<string, decimal>();
         var predecessores = new Dictionary<string, string>();
@@ -61,7 +60,7 @@ public class CalculoRotaService(IRepositoryCrud<Deslocamento> repository) : ICal
         if (!distancias.ContainsKey(destino) || distancias[destino] == decimal.MaxValue)
             return null; // Rota não encontrada
 
-        var caminho = new List<string>();
+        var caminho = new List<Deslocamento>();
         var vertice = destino;
 
         while (vertice != origem)
@@ -69,10 +68,16 @@ public class CalculoRotaService(IRepositoryCrud<Deslocamento> repository) : ICal
             if (!predecessores.ContainsKey(vertice))
                 throw new KeyNotFoundException($"The given key '{vertice}' was not present in the dictionary.");
 
-            caminho.Add(vertice);
-            vertice = predecessores[vertice];
+            var origemVertice = predecessores[vertice];
+            var deslocamento = deslocamentos.FirstOrDefault(d => d.Origem == origemVertice && d.Destino == vertice);
+
+            if (deslocamento == null)
+                throw new InvalidOperationException($"No displacement found from {origemVertice} to {vertice}.");
+
+            caminho.Add(deslocamento);
+            vertice = origemVertice;
         }
-        caminho.Add(origem);
+
         caminho.Reverse();
 
         return new Rota(caminho, distancias[destino]);

@@ -1,20 +1,19 @@
-
 namespace Rotas.Domain.Entities.Grafo;
 
 public class Rota
 {
-    public List<string> Caminho { get; set; }
+    public IEnumerable<Deslocamento> Caminhos { get; set; }
     public decimal CustoTotal { get; set; }
 
     public Rota()
     {
-        Caminho = new List<string>();
+        Caminhos = new List<Deslocamento>();
         CustoTotal = 0;
     }
 
-    public Rota(List<string> caminho, decimal custoTotal)
+    public Rota(IEnumerable<Deslocamento> caminhos, decimal custoTotal)
     {
-        Caminho = caminho;
+        Caminhos = caminhos;
         CustoTotal = custoTotal;
     }
 }

@@ -1,7 +1,23 @@
 name: "rotas-compose-service-test"
 
 services:
-    test-backend-api:
+
+    rotas-frontend-test:
+        container_name: "rotas-frontend-test"
+        build:
+            context: ./src/frontend/
+            dockerfile: Dockerfile
+            args:
+                ANGULAR_ENVIRONMENT: "Test"
+        networks:
+            - "calculo-rotas-network-test"
+        ports:
+            - "4998:80"
+        depends_on:
+            - rotas-backend-api-test
+            
+    rotas-backend-api-test:
+        container_name: "rotas-backend-api-test"
         build:
             context: ./src/backend/
             dockerfile: Dockerfile
@@ -12,8 +28,26 @@ services:
             - "4999:4999"
         networks:
             - "calculo-rotas-network-test"
+        depends_on:
+            mysql-db-test:
+                condition: service_healthy
+    
+    mysql-db-test:
+        container_name: "mysql-db-test"
+        image: mysql
+        restart: always
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: "root"
+        networks:
+            - "calculo-rotas-network-test"
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
     
 networks:
     "calculo-rotas-network-test":
         driver: bridge
-

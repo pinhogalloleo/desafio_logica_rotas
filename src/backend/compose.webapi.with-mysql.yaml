@@ -1,0 +1,31 @@
+name: "rotas-backend-with-mysql"
+
+services:
+  webapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "4999:4999"
+    depends_on:
+      - mysql-db-service
+    networks:
+      - rotas-backend-mysql-network
+
+  mysql-db-service:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: rotas
+      MYSQL_USER: rotas
+      MYSQL_PASSWORD: rotas
+    ports:
+      - "3306:3306"
+    networks:
+      - rotas-backend-mysql-network
+
+networks:
+  rotas-backend-mysql-network:
+    driver: bridge

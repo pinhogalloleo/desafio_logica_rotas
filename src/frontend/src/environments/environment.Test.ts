@@ -2,5 +2,5 @@
 export const environment = {
 	production: false,
 	environmentName: 'Test',
-	backendUrl: 'http://test-backend-api:4999/api'
+	backendUrl: 'http://rotas-backend-api-test:4999/api'
 }

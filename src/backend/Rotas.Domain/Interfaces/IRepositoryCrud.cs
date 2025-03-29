@@ -7,7 +7,7 @@ public interface IRepositoryCrud<T> where T : class
     /// <summary>
     /// Get all entities
     /// </summary>
-    Task<List<T>> GetAllAsync();
+    Task<IEnumerable<T>> GetAllAsync();
 
     /// <summary>
     /// Get all entities filtered by a expression, like "x => x.Nome=="alfredo".

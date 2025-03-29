@@ -3,12 +3,23 @@
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>    
+    <ImplicitUsings>enable</ImplicitUsings>
     <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Pomelo.EntityFrameworkCore.Mysql" Version="9.0.0-preview.3.efcore.9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
+    <PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="1.21.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="8.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="8.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.0.0" />
@@ -17,8 +28,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Rotas.Domain\Rotas.Domain.csproj" />
     <ProjectReference Include="..\Rotas.Application\Rotas.Application.csproj" />
-    <ProjectReference
-      Include="..\Rotas.DataAccess.FileDataAccess\Rotas.DataAccess.FileDataAccess.csproj" />
+    <ProjectReference Include="..\Rotas.DataAccess.EF\Rotas.DataAccess.EF.csproj" />
+    <!-- <ProjectReference
+    Include="..\Rotas.DataAccess.FileDataAccess\Rotas.DataAccess.FileDataAccess.csproj" /> -->
   </ItemGroup>
 
 </Project>

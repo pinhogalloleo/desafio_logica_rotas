@@ -9,9 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rotas.Domain", "Rotas.Domai
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rotas.Application", "Rotas.Application\Rotas.Application.csproj", "{C72F7C77-EE14-44E7-81EE-A2888BE3462A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotasTests.IntegrationTests", "RotasTests.IntegrationTests\RotasTests.IntegrationTests.csproj", "{268BA2E9-78C0-459D-A725-EE95D358F1E7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotasTests.UnitTests", "RotasTests.UnitTests\RotasTests.UnitTests.csproj", "{4AD5EE2B-32E7-425F-9B38-CC5989691D4B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rotas.DataAccess.EF", "Rotas.DataAccess.EF\Rotas.DataAccess.EF.csproj", "{66EDFE31-5A7D-42A0-9942-B3A9D266EDC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +81,18 @@ Global
 		{4AD5EE2B-32E7-425F-9B38-CC5989691D4B}.Release|x64.Build.0 = Release|Any CPU
 		{4AD5EE2B-32E7-425F-9B38-CC5989691D4B}.Release|x86.ActiveCfg = Release|Any CPU
 		{4AD5EE2B-32E7-425F-9B38-CC5989691D4B}.Release|x86.Build.0 = Release|Any CPU
+		{66EDFE31-5A7D-42A0-9942-B3A9D266EDC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66EDFE31-5A7D-42A0-9942-B3A9D266EDC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66EDFE31-5A7D-42A0-9942-B3A9D266EDC7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{66EDFE31-5A7D-42A0-9942-B3A9D266EDC7}.Debug|x64.Build.0 = Debug|Any CPU
+		{66EDFE31-5A7D-42A0-9942-B3A9D266EDC7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{66EDFE31-5A7D-42A0-9942-B3A9D266EDC7}.Debug|x86.Build.0 = Debug|Any CPU
+		{66EDFE31-5A7D-42A0-9942-B3A9D266EDC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66EDFE31-5A7D-42A0-9942-B3A9D266EDC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66EDFE31-5A7D-42A0-9942-B3A9D266EDC7}.Release|x64.ActiveCfg = Release|Any CPU
+		{66EDFE31-5A7D-42A0-9942-B3A9D266EDC7}.Release|x64.Build.0 = Release|Any CPU
+		{66EDFE31-5A7D-42A0-9942-B3A9D266EDC7}.Release|x86.ActiveCfg = Release|Any CPU
+		{66EDFE31-5A7D-42A0-9942-B3A9D266EDC7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -26,7 +26,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IUseCase<UpdateDeslocamentoDto, Task>, UpdateDeslocamentoUseCase>();
         services.AddScoped<IUseCase<DeleteDeslocamentoDto, Task>, DeleteDeslocamentoUseCase>();
         services.AddScoped<IUseCase<GetByIdDeslocamentoDto, Task<Deslocamento>>, GetByIdDeslocamentoUseCase>();
-        services.AddScoped<IUseCase<Task<List<Deslocamento>>>, GetAllDeslocamentoUseCase>();
+        services.AddScoped<IUseCase<Task<IEnumerable<Deslocamento>>>, GetAllDeslocamentoUseCase>();
 
         services.AddScoped<IDeslocamentoService, DeslocamentoService>();
         services.AddScoped<ICalculoMelhorRotaService, CalculoMelhorRotaService>();
@@ -37,7 +37,7 @@ public static class ServiceCollectionExtensions
 
         return services;
     }
-    
+
 
 }
 

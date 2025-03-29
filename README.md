@@ -21,6 +21,13 @@ comando: dotnet new web api "Rotas.Api"
 porta recomendada: 4999
 aida não contém https, authn, authz
 
+instalar ferramentas para o entity framework:
+dotnet tool install --global dotnet ef
+
+após instalar, executar a ferramenta "migrations" para o entity framework criar mapeamentos para o DB.
+executar na raiz da solution, onde está o arquivo .sln e os diretórios dos projetos (apenas para o apontamento de diretórios dar certo. Se mudar o local de execução, mude o path relativo)
+dotnet ef migrations add InitialCreate --project Rotas.DataAccess.EF\Rotas.DataAccess.EF.csproj --startup-project Rotas.Api\Rotas.Api.csproj
+
 # datastore ---
 Arquivo "deslocamento.csv"
 a razão é simplificar a execução e testes, focando no escopo: "construir um frontend Angular com páginas crud, e uma funcionalidade para solicitar a melhor rota entre 2 pontos;um backend web api com .net core, provendo os endpoints para o backend;datastore: o mais simples possível, para focar nos componentes e no algoritmo"

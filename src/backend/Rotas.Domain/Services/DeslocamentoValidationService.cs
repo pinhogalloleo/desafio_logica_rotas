@@ -15,8 +15,8 @@ public class DeslocamentoValidationService(IRepositoryCrud<Deslocamento> reposit
         var cleanDestino = destino.Trim().ToUpperInvariant();
 
         var list = await this._repository.SearchByExpressionAsync(x =>
-            string.Equals(x.Origem, cleanOrigem, StringComparison.OrdinalIgnoreCase) &&
-            string.Equals(x.Destino, cleanDestino, StringComparison.OrdinalIgnoreCase) &&
+            (x.Origem == cleanOrigem && x.Destino == cleanDestino)
+            &&
             (!excludeId.HasValue || x.Id != excludeId.Value));
 
         if (list == null || list.Count == 0)

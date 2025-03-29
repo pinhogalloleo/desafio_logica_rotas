@@ -1,7 +1,7 @@
 
 # Define the Angular environment (default: Development)
 # possible values for environment: Default, Development, Test
-ARG ANGULAR_ENVIRONMENT="Development"
+ARG ANGULAR_ENVIRONMENT="Test"
 
 # Stage 1: Build the Angular app
 FROM node:18 AS build
@@ -32,7 +32,10 @@ COPY --from=build /app/dist/rotas/prerendered-routes.json /usr/share/nginx/html/
 ARG ANGULAR_ENVIRONMENT
 COPY nginx.${ANGULAR_ENVIRONMENT}.conf /etc/nginx/nginx.conf
 
-# Expose port 4998 for the Angular app
+# MANDATORY to expose this, once it is default port for Nginx
+EXPOSE 80
+
+# Expose port 4998 for the Angular app, symbolically
 EXPOSE 4998
 
 # Start Nginx
