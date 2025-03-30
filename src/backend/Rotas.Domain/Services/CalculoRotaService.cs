@@ -16,7 +16,7 @@ public class CalculoRotaService(IRepositoryCrud<Deslocamento> repository) : ICal
     public async Task<Rota?> CalcularRotaAsync(string origem, string destino)
     {
         var viagens = await _repository.GetAllAsync();
-        if (viagens == null || viagens.Count() == 0)
+        if (viagens == null || !viagens.Any())
             throw new NaoEncontradoException("Nenhum deslocamento encontrado para calcular a rota.");
 
         var grafo = new Grafo(viagens);
@@ -26,8 +26,8 @@ public class CalculoRotaService(IRepositoryCrud<Deslocamento> repository) : ICal
 
     private static Rota? EncontrarMelhorRota(Grafo grafo, string origem, string destino, IEnumerable<Deslocamento> deslocamentos)
     {
-        var distancias = new Dictionary<string, decimal>();
-        var predecessores = new Dictionary<string, string>();
+        var distancias = new Dictionary<string, decimal>(StringComparer.Ordinal);
+        var predecessores = new Dictionary<string, string>(StringComparer.Ordinal);
         var filaPrioridade = new SortedSet<(decimal Custo, string Vertice)>();
 
         foreach (var verticeIn in grafo.Adjacencias.Keys)
@@ -57,7 +57,7 @@ public class CalculoRotaService(IRepositoryCrud<Deslocamento> repository) : ICal
             }
         }
 
-        if (!distancias.ContainsKey(destino) || distancias[destino] == decimal.MaxValue)
+        if (!distancias.TryGetValue(destino, out var distanciaDestino) || distanciaDestino == decimal.MaxValue)
             return null; // Rota não encontrada
 
         var caminho = new List<Deslocamento>();
@@ -79,8 +79,11 @@ public class CalculoRotaService(IRepositoryCrud<Deslocamento> repository) : ICal
         }
 
         caminho.Reverse();
+        var distanciasFinal = distancias[destino];
+        var caminhoFinal = caminho;
+        var rota = new Rota(caminho, distancias[destino]);
 
-        return new Rota(caminho, distancias[destino]);
+        return rota;
     }
 
 

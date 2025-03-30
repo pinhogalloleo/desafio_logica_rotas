@@ -15,7 +15,7 @@ RUN npm install
 COPY . ./
 
 # Build the Angular app for the specified environment
-ARG ANGULAR_ENVIRONMENT
+ARG ANGULAR_ENVIRONMENT="Test"
 RUN npm run build --configuration=${ANGULAR_ENVIRONMENT}
 
 # Stage 2: Serve the app with Nginx

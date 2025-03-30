@@ -34,13 +34,33 @@
     {{ errorMessage }}
   </div>
 
-  <div *ngIf="rota" class="mt-4">
+  <div *ngIf="rota && rota.caminhos && rota.caminhos.length > 0" class="mt-4">
     <h3>Melhor Rota:</h3>
     <p><strong>Custo: {{ rota.custoTotal }} </strong></p>
     <h4>Percurso:</h4>
-    <ul>
-        <li *ngFor="let ponto of rota.caminho">{{ponto}}</li>
-    </ul>    
+    <div class="mt-4">
+      <table class="table">
+
+        <thead>
+          <tr>
+            <th>Id Percurso</th>
+            <th>Origem</th>
+            <th>Destino</th>
+            <th>Custo Por Percurso</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let caminho of rota.caminhos">
+            <td>{{ caminho.id }}</td>
+            <td>{{ caminho.origem }}</td>
+            <td>{{ caminho.destino }}</td>
+            <td>{{ caminho.custo }}</td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
   </div>
 
 </div>
